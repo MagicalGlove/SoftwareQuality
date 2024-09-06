@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj": {}
+    "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Project\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj": {
+    "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Project\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj",
+        "projectUniqueName": "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Project\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj",
+        "projectPath": "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Project\\Backend\\Backend.csproj",
         "packagesPath": "C:\\Users\\Merved\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\obj\\",
+        "outputPath": "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Project\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Merved\\AppData\\Roaming\\NuGet\\NuGet.Config",

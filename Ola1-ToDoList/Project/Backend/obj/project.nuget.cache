@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BrRioLUPRCo=",
+  "dgSpecHash": "XfSPRGZOONU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj",
+  "projectFilePath": "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Project\\Backend\\Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Merved\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Merved\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
