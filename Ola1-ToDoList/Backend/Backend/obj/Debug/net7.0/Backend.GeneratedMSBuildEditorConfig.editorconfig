@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Backend
-build_property.ProjectDir = C:\Users\Mads T.F. Knudsen\Documents\GitHub\SoftwareQuality\Ola1-ToDoList\Backend\Backend\
+build_property.ProjectDir = C:\Users\Merved\Documents\GitHub\SoftwareQuality\Ola1-ToDoList\Backend\Backend\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

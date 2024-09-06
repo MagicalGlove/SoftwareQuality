@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mads T.F. Knudsen\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj": {}
+    "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mads T.F. Knudsen\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj": {
+    "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mads T.F. Knudsen\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj",
+        "projectUniqueName": "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "C:\\Users\\Mads T.F. Knudsen\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj",
-        "packagesPath": "C:\\Users\\Mads T.F. Knudsen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mads T.F. Knudsen\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\obj\\",
+        "projectPath": "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\Backend.csproj",
+        "packagesPath": "C:\\Users\\Merved\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Merved\\Documents\\GitHub\\SoftwareQuality\\Ola1-ToDoList\\Backend\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Mads T.F. Knudsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Merved\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -56,12 +61,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.19, 7.0.19]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[7.0.19, 7.0.19]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[7.0.19, 7.0.19]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[7.0.19, 7.0.19]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
