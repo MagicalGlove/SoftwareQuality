@@ -3,7 +3,7 @@ import * as api from '../api/tasks';
 import { Task } from '../types/tasks';
 
 jest.mock('../api/tasks', () => ({
-    addTaskToAPI: jest.fn(),
+    addTaskAPI: jest.fn(),
   }));
   
   describe('addTask', () => {
