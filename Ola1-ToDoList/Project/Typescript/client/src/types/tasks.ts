@@ -6,3 +6,9 @@ export type Task = {
   isCompleted?: boolean;
   category?: number;
 };
+
+export enum TASK_CATEGORIES {
+  WORK = 1,
+  CHORES = 2,
+  LEISURE = 3
+}

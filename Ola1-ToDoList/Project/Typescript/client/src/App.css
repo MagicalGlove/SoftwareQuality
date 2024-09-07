@@ -46,3 +46,20 @@
     margin-right: 20px;
     padding: 10px;
 }
+
+.tabs {
+    margin-bottom: 20px; /* Space below the tabs */
+  }
+  
+  .tabs button {
+    margin: 0 10px; /* Horizontal margin between buttons */
+    padding: 10px 20px; /* Adjust padding if needed */
+    border: 1px solid #ccc; /* Add a border if desired */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f0f0f0; /* Background color */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  
+  .tabs button:hover {
+    background-color: #ddd; /* Background color on hover */
+  }

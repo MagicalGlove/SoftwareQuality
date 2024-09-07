@@ -12,6 +12,7 @@ const App = () => {
   const [tasks, setTasks] = useState<Task[]>();
   const [text, setText] = useState<string>("");
   const [deadline, setDeadline] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<number>(0);
 
   const fetchTasks = async () => {
     try {
@@ -57,12 +58,19 @@ const App = () => {
     if (!id || typeof isCompleted !== "boolean") return;
     try {
       await completedTask(id, isCompleted);
-      console.log("Task completed/ucompleted:", id);
+      console.log("Task completed/uncompleted:", id);
       await fetchTasks();
     } catch (error) {
       console.error("Error deleting task:", error);
     }
   }
+  const handleTabChange = (category: number) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredTasks = selectedCategory === 0 
+    ? tasks 
+    : tasks?.filter(task => task.category === selectedCategory);
 
   return (
     <div className="App">
@@ -86,6 +94,12 @@ const App = () => {
             Add Task
           </button>
         </div>
+        <div className="tabs">
+          <button onClick={() => handleTabChange(0)}>All</button>
+          <button onClick={() => handleTabChange(1)}>Work</button>
+          <button onClick={() => handleTabChange(2)}>Chores</button>
+          <button onClick={() => handleTabChange(3)}>Leisure</button>
+        </div>
         <div className="table-container">
           <table className="table-content">
             <thead>
@@ -97,7 +111,7 @@ const App = () => {
               </tr>
             </thead>
             <tbody>
-              {tasks?.map((task) => (
+              {filteredTasks?.map((task) => (
                 <tr key={task.id}>
                   <td className="table-cell">{task.text}</td>
                   <td className="table-cell">{task.deadline || "-"}</td>
