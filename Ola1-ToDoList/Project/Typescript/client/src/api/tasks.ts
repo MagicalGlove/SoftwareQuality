@@ -24,15 +24,3 @@ export const addTaskAPI = async (taskText: string): Promise<Task> => {
     }
     return response.json();
   };
-
-  export const deleteTaskAPI = async (deleteTaskId: number): Promise<Task> => {
-    const response = await fetch(`${baseUrl}/tasks`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: deleteTaskId }),
-    });
-    if (!response.ok) {
-      throw new Error('Failed to delete task');
-    }
-    return response.json();
-  };
