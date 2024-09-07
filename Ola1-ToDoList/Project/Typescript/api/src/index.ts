@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { AppDataSource } from "./ormconfig";
 import {
+  changeCompleteStateTask,
   createTask,
   deleteTask,
   getAllTasks,
@@ -46,6 +47,20 @@ AppDataSource.initialize()
       try {
         const { id } = req.body;
         const tasks = await deleteTask(id);
+        res.json(tasks);
+      } catch (error) {
+        console.error("Error deleting task:", error);
+
+        res
+          .status(500)
+          .json({ error: "An error occurred while deleting task" });
+      }
+    });
+
+    app.patch("/tasks", async (req: Request, res: Response) => {
+      try {
+        const { id, isCompleted } = req.body;
+        const tasks = await changeCompleteStateTask(id, isCompleted);
         res.json(tasks);
       } catch (error) {
         console.error("Error deleting task:", error);
