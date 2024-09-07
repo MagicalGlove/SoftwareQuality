@@ -30,3 +30,4 @@ jest.mock('../api/tasks', () => ({
       expect(api.addTaskAPI).toHaveBeenCalledWith(newTask);
     });
   });
+

@@ -1,5 +1,6 @@
 import { AppDataSource } from '../ormconfig';
 import { Task } from '../entities/Task';
+import {ObjectId} from "mongodb";
 
 const taskRepository = AppDataSource.getMongoRepository(Task);
 
@@ -21,11 +22,10 @@ async function getAllTasks() {
   return tasks
 }
 
-async function editTask(id: string, _task: Task) {
-  const task = await taskRepository.findOne({ where: { id: id } });
+async function editTask(id: ObjectId, _task: Task) {
+  const task = await taskRepository.findOne({ where: { _id: id } });
   if (!task) {
     throw new Error('Task not found');
-
 
   } else {
     task.text = _task.text;
@@ -36,4 +36,4 @@ async function editTask(id: string, _task: Task) {
 }
 
 
-export {createTask, getAllTasks}
+export {createTask, getAllTasks,editTask}
