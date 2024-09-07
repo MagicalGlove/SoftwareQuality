@@ -4,6 +4,8 @@ import { Task } from "./types/tasks";
 import { deleteTask } from "./utils/deleteTask";
 import { addTask } from "./utils/addTask";
 import "./App.css";
+import checkmark from "./misc/Checkmark.png";
+import xMark from "./misc/X-Mark.png";
 
 const App = () => {
   const [tasks, setTasks] = useState<Task[]>();
@@ -29,6 +31,7 @@ const App = () => {
     addTask(newTask);
     setText("");
     setDeadline("");
+    fetchTasks();
   };
 
   useEffect(() => {
@@ -84,7 +87,14 @@ const App = () => {
                   <td className="table-cell">{task.text}</td>
                   <td className="table-cell">{task.deadline || "-"}</td>
                   <td className="table-cell">
-                    {task.isCompleted ? "Yes" : "No"}
+                    <img
+                      src={task.isCompleted ? checkmark : xMark}
+                      alt="logo"
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                      }}
+                    />
                   </td>
                   <td className="table-cell">
                     <button
