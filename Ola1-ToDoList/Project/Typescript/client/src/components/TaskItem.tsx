@@ -5,7 +5,7 @@ import XMark from "../misc/X-Mark.png";
 
 interface TaskItemProps {
   task: Task;
-  onDelete: (id: number) => void;
+  onDelete: (id?: number) => void;
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete }) => {
@@ -30,7 +30,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete }) => {
       <p>{task.id}</p>
       <button
         style={{ backgroundColor: "red", marginBottom: "10px" }}
-        onClick={() => onDelete(task.id)}
+        onClick={() => onDelete(task?.id)}
       >
         Delete
       </button>

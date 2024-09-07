@@ -12,21 +12,21 @@ jest.mock('../api/tasks', () => ({
       const mockTask: Task = { id: 2, text: 'Second Task' };
       (api.addTaskAPI as jest.Mock).mockResolvedValue(mockTask);
   
-      const newTaskText = 'Second Task';
+      const newTask = {text: 'Second Task'};
       
-      const returnedTask = await addTask(newTaskText);
+      const returnedTask = await addTask(newTask);
       
       expect(returnedTask).toEqual(mockTask);
-      expect(api.addTaskAPI).toHaveBeenCalledWith(newTaskText);
+      expect(api.addTaskAPI).toHaveBeenCalledWith(newTask);
     });
   
     it('should handle API failure gracefully', async () => {
 
       (api.addTaskAPI as jest.Mock).mockRejectedValue(new Error('Failed to add task'));
   
-      const newTaskText = 'Failed Task';
+      const newTask = {text: 'Failed Task'};
       
-      await expect(addTask(newTaskText)).rejects.toThrow('Failed to add task');
-      expect(api.addTaskAPI).toHaveBeenCalledWith(newTaskText);
+      await expect(addTask(newTask)).rejects.toThrow('Failed to add task');
+      expect(api.addTaskAPI).toHaveBeenCalledWith(newTask);
     });
   });
