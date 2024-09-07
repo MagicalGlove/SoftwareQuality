@@ -5,11 +5,17 @@
 /client/.pnp
 /client/.pnp.js
 
+/api/node_modules
+/api/.pnp
+/api/.pnp.js
+/api/config.env
+
 # testing
 /coverage
 
 # production
 /client/build
+/api/build
 
 # misc
 .DS_Store

@@ -1,8 +1,10 @@
+import { getAllTasksAPI } from "./api/tasks";
 
 const App = () => {
+  getAllTasksAPI()
   return (
     <div className="App">
-      Ola1
+    Ola1
     </div>
   );
 }
