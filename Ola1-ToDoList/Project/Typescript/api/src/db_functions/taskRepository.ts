@@ -39,17 +39,13 @@ async function editTask(id: string, _task: Task) {
 }
 
 async function deleteTask(id: string) {
-  console.log("a");
-
   const objectId = new ObjectId(id); // Convert the string id to ObjectId
-  console.log("b");
+
   const task = await taskRepository.findOne({ where: { _id: objectId } });
-  console.log("3");
 
   if (!task) {
     throw new Error("Task not found");
   } else {
-    console.log("4");
     await taskRepository.remove(task); // Delete the task from the database
     console.log("Task has been deleted:", task);
     return task;
