@@ -54,13 +54,12 @@ async function deleteTask(id: string) {
 
 async function changeCompleteStateTask(id: string, isCompleted: boolean) {
   const objectId = new ObjectId(id);
-  console.log("hereeee", isCompleted);
 
   const task = await taskRepository.findOne({ where: { _id: objectId } });
   if (!task) {
     throw new Error("Task not found");
   } else {
-    task.isCompleted = isCompleted; //Changes to the opposite of what it currently is
+    task.isCompleted = isCompleted;
     await taskRepository.save(task);
     console.log("Complete state has been updated:", task);
     return task;

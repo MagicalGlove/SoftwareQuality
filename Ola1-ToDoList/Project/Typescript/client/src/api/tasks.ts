@@ -47,7 +47,7 @@ export const completedTaskAPI = async (
     body: JSON.stringify({ id: completedTaskId, isCompleted: isCompleted }),
   });
   if (!response.ok) {
-    throw new Error("Failed to delete task");
+    throw new Error("Failed to change completion state of task");
   }
   return response.json();
 };

@@ -63,7 +63,7 @@ AppDataSource.initialize()
         const tasks = await changeCompleteStateTask(id, isCompleted);
         res.json(tasks);
       } catch (error) {
-        console.error("Error deleting task:", error);
+        console.error("Error changing completion state of task:", error);
 
         res
           .status(500)

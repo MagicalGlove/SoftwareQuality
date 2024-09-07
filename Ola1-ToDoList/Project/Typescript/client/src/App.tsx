@@ -110,8 +110,8 @@ const App = () => {
                         height: "30px",
                         cursor: "pointer",
                       }}
-                      onClick={() =>
-                        handleImageClick(task.id, !task.isCompleted)
+                      onClick={
+                        () => handleImageClick(task.id, !task.isCompleted) //Changes to the opposite of what it currently is
                       }
                     />
                   </td>
