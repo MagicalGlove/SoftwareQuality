@@ -13,4 +13,7 @@ export class Task {
 
   @Column()
   isCompleted!: boolean;
+
+  @Column()
+  category!: number;
 }

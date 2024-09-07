@@ -25,9 +25,9 @@ AppDataSource.initialize()
 
       app.post('/tasks', async (req: Request, res: Response) => {
         try {
-          const { text } = req.body;
-          const tasks = await createTask(text);
-          res.json(tasks);
+          const { text, deadline, isCompleted } = req.body;
+          const task = await createTask(text, deadline, isCompleted);
+          res.json(task);
         } catch (error) {
           console.error('Error fetching tasks:', error);
           res.status(500).json({ error: 'An error occurred while fetching tasks' });

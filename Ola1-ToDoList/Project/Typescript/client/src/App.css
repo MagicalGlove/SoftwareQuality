@@ -1,0 +1,48 @@
+.App {
+    display: flex;
+    flex-direction: column; /* Align elements vertically */
+    align-items: center;    /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+  }
+
+  .container {
+    width: 50%; /* Make sure header takes full width */
+    padding: 20px; /* Space around the button */
+    border: 1px solid;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: flex-end; /* Align button to the right */
+    width: 100%; /* Make sure header takes full width */
+  }
+  
+  .add-task-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .table-container {
+    width: 100%;
+    margin-top: 20px; /* Space between the button and the table */
+  }
+
+.table-cell {
+    padding: 10px;
+  }
+
+.table-cell-header {
+    text-align: left;
+}
+
+.table-content {
+    width: 100%;
+    border-collapse: collapse;
+    padding: 30px;
+}
+
+.input-field {
+    margin-right: 20px;
+    padding: 10px;
+}

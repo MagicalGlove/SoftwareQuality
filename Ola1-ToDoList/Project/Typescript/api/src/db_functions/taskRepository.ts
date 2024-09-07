@@ -3,13 +3,16 @@ import { Task } from '../entities/Task';
 
 const taskRepository = AppDataSource.getMongoRepository(Task);
 
-async function createTask(text: string) {
+async function createTask(text: string, deadline: string | undefined, isCompleted: boolean | undefined) {
   const newTask = taskRepository.create({
-    text: text,  
+    text: text,
+    deadline: deadline,
+    isCompleted: isCompleted  
   });
 
-  await taskRepository.save(newTask);
+  const task = await taskRepository.save(newTask);
   console.log('Task has been saved:', newTask);
+  return task;
 }
 
 async function getAllTasks() {

@@ -13,11 +13,11 @@ export const getAllTasksAPI = async (): Promise<Task[]> => {
   return response.json();
 };
 
-export const addTaskAPI = async (taskText: string): Promise<Task> => {
+export const addTaskAPI = async (newTask: Task): Promise<Task> => {
     const response = await fetch(`${baseUrl}/tasks`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: taskText }),
+      body: JSON.stringify(newTask),
     });
     if (!response.ok) {
       throw new Error('Failed to add task');
