@@ -7,4 +7,10 @@ export class Task {
 
   @Column()
   text!: string;
+
+  @Column()
+  deadline!: Date | null;
+
+  @Column()
+  isCompleted!: boolean;
 }
