@@ -35,7 +35,8 @@ const App = () => {
     fetchTasks();
   }, []);
 
-  async function handleButtonClick(id: number): Promise<void> {
+  async function handleButtonClick(id: string | undefined): Promise<void> {
+    if (!id) return;
     try {
       await deleteTask(id);
       console.log("Task deleted:", id);
@@ -85,7 +86,14 @@ const App = () => {
                   <td className="table-cell">
                     {task.isCompleted ? "Yes" : "No"}
                   </td>
-                  <td className="table-cell">{task.deadline || "-"}</td>
+                  <td className="table-cell">
+                    <button
+                      style={{ backgroundColor: "red", marginBottom: "10px" }}
+                      onClick={() => handleButtonClick(task.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
