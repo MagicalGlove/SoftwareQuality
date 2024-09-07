@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllTasksAPI } from "./api/tasks";
 import { Task } from "./types/tasks";
 import { deleteTask } from "./utils/deleteTask";
+import { completedTask } from "./utils/completedTask";
 import { addTask } from "./utils/addTask";
 import "./App.css";
 import checkmark from "./misc/Checkmark.png";
@@ -43,6 +44,20 @@ const App = () => {
     try {
       await deleteTask(id);
       console.log("Task deleted:", id);
+      await fetchTasks();
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  }
+
+  async function handleImageClick(
+    id: string | undefined,
+    isCompleted: boolean | undefined
+  ): Promise<void> {
+    if (!id || typeof isCompleted !== "boolean") return;
+    try {
+      await completedTask(id, isCompleted);
+      console.log("Task completed/ucompleted:", id);
       await fetchTasks();
     } catch (error) {
       console.error("Error deleting task:", error);
@@ -93,12 +108,20 @@ const App = () => {
                       style={{
                         width: "30px",
                         height: "30px",
+                        cursor: "pointer",
                       }}
+                      onClick={
+                        () => handleImageClick(task.id, !task.isCompleted) //Changes to the opposite of what it currently is
+                      }
                     />
                   </td>
                   <td className="table-cell">
                     <button
-                      style={{ backgroundColor: "red", marginBottom: "10px" }}
+                      style={{
+                        backgroundColor: "red",
+                        marginBottom: "10px",
+                        cursor: "pointer",
+                      }}
                       onClick={() => handleButtonClick(task.id)}
                     >
                       Delete
