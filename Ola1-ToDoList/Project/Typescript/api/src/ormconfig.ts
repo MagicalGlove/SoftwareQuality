@@ -7,6 +7,7 @@ dotenv.config({ path: path.resolve(__dirname, '../config.env') });
 export const AppDataSource = new DataSource({
   type: 'mongodb',
   url: process.env.DATABASE_URL,
+  database: 'sqOla1',
   useNewUrlParser: true,
   useUnifiedTopology: true,
   synchronize: true,
