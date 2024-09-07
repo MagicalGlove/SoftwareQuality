@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { getAllTasksAPI } from "./api/tasks";
 import { Task } from "./types/tasks";
 import { deleteTask } from "./utils/deleteTask";
-import TaskItem from "./components/TaskItem";
 import { addTask } from "./utils/addTask";
 import "./App.css";
 
@@ -75,6 +74,7 @@ const App = () => {
                 <th className="table-cell table-cell-header">Text</th>
                 <th className="table-cell table-cell-header">Deadline</th>
                 <th className="table-cell table-cell-header">Completed</th>
+                <th className="table-cell table-cell-header">Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -85,6 +85,7 @@ const App = () => {
                   <td className="table-cell">
                     {task.isCompleted ? "Yes" : "No"}
                   </td>
+                  <td className="table-cell">{task.deadline || "-"}</td>
                 </tr>
               ))}
             </tbody>
