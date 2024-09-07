@@ -1,5 +1,7 @@
 import { AppDataSource } from '../ormconfig';
 import { Task } from '../entities/Task';
+import { ObjectId } from 'mongodb';
+
 
 const taskRepository = AppDataSource.getMongoRepository(Task);
 
@@ -33,4 +35,44 @@ async function editTask(id: string, _task: Task) {
 }
 
 
-export {createTask, getAllTasks}
+async function deleteTask(id: string) {
+  console.log("a");
+  
+  const objectId = new ObjectId(id); // Convert the string id to ObjectId
+  console.log("b");
+  const task = await taskRepository.findOne({ where: { _id: objectId } });
+  console.log("3");
+  
+  if (!task) {
+    throw new Error('Task not found');
+  } else {
+    console.log("4");
+    await taskRepository.remove(task);  // Delete the task from the database
+    console.log('Task has been deleted:', task);
+    return task;
+  }
+}
+
+
+// async function deleteTask(id: string) {
+//   console.log("a");
+  
+//   const task = await taskRepository.findOne({ where: { _id: id } });
+//   console.log("b");
+//   console.log(id);
+//   console.log(task);
+  
+//   if (!task) {
+//     throw new Error('Task not found');
+//   } else {
+//     console.log("c");
+//     await taskRepository.remove(task);
+//     console.log("d");
+//     console.log('Task has been deleted:', task);
+//     return task;
+//   }
+// }
+
+
+
+export {createTask, getAllTasks, deleteTask}
