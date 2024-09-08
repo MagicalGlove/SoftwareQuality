@@ -48,9 +48,10 @@ AppDataSource.initialize()
     app.put('/tasks/:id', async (req: Request, res: Response) => {
       try {
         const { id } = req.params;
-        const { text } = req.body;
+        const updatedTask = req.body;
+        console.log("Preupdate:" , updatedTask)
         
-        const task = await editTask(id, text)
+        const task = await editTask(id, updatedTask)
         res.json(task);
       } catch (error) {
         console.error('Error updating task:', error);

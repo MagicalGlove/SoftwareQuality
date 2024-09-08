@@ -49,6 +49,7 @@ const App = () => {
       console.log(editedTask)
       const updatedTask = await editTaskAPI(editedTask);
       console.log("Updated task:", updatedTask);
+      fetchTasks()
     } catch (error) {
       console.error("Error fetching tasks:", error);
     }
