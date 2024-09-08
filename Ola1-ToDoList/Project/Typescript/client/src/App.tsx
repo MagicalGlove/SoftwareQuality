@@ -131,12 +131,13 @@ const App = () => {
                 <tr key={task.id}>
                   <td className="table-cell">{task.text}</td>
                   <td className="table-cell">{task.deadline || "-"}</td>
-                  <td className="table-cell"><select value={task.category} onChange={(e) => handleEditTask(e, task)}>
-    <option value="0">None</option>
-    <option value="1">Work</option>
-    <option value="2">Chores</option>
-    <option value="3">Leisure</option>
-  </select></td>
+                  <td className="table-cell">
+                    <select value={task.category} onChange={(e) => handleEditTask(e, task)}>
+                      <option value="0">None</option>
+                      <option value="1">Work</option>
+                      <option value="2">Chores</option>
+                      <option value="3">Leisure</option>
+                    </select></td>
                   <td className="table-cell">
                     <img
                       src={task.isCompleted ? checkmark : xMark}
