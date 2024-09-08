@@ -51,3 +51,15 @@ export const completedTaskAPI = async (
   }
   return response.json();
 };
+
+export const editTaskAPI = async (task: Task): Promise<Task> => {
+  const response = await fetch(`${baseUrl}/tasks/${task.id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(task),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to edit task');
+  }
+  return response.json();
+};

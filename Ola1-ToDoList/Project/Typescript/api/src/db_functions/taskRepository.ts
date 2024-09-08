@@ -28,8 +28,9 @@ async function getAllTasks() {
   return tasks;
 }
 
-async function editTask(id: ObjectId, _task: Task) {
-  const task = await taskRepository.findOne({ where: { _id: id } });
+async function editTask(id: string, _task: Task) {
+  const objectId = new ObjectId(id);
+  const task = await taskRepository.findOne({ where: { _id: objectId } });
   if (!task) {
     throw new Error('Task not found');
   } else {

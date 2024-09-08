@@ -4,9 +4,11 @@ import {
   changeCompleteStateTask,
   createTask,
   deleteTask,
+  editTask,
   getAllTasks,
 } from "./db_functions/taskRepository";
 import cors from "cors";
+import { ObjectId } from "mongodb";
 
 const app = express();
 const port = 3001;
@@ -40,6 +42,19 @@ AppDataSource.initialize()
         res
           .status(500)
           .json({ error: "An error occurred while fetching tasks" });
+      }
+    });
+
+    app.put('/tasks/:id', async (req: Request, res: Response) => {
+      try {
+        const { id } = req.params;
+        const { text } = req.body;
+        
+        const task = await editTask(id, text)
+        res.json(task);
+      } catch (error) {
+        console.error('Error updating task:', error);
+        res.status(500).json({ error: 'An error occurred while updating task' });
       }
     });
 
