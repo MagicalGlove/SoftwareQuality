@@ -35,6 +35,8 @@ async function editTask(id: string, _task: Task) {
     throw new Error('Task not found');
   } else {
     task.text = _task.text;
+    task.category = _task.category;
+    task.deadline = _task.deadline;
     await taskRepository.save(task);
     console.log("Task has been updated:", task);
     return task;
