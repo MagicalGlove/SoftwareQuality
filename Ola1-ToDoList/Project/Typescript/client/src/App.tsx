@@ -14,7 +14,7 @@ const App = () => {
   const [editTask, setEditTask] = useState<Task>();
   const [text, setText] = useState<string>("");
   const [deadline, setDeadline] = useState<string>("");
-  const [selectedCategory, setSelectedCategory] = useState<number>(0);
+  const [selectedCategory, setSelectedCategory] = useState<number>(4);
   const [editTaskId, setEditTaskId] = useState<string>("");
 
   const fetchTasks = async () => {
@@ -126,7 +126,7 @@ const App = () => {
   }
 
   const filteredTasks =
-    selectedCategory === 0
+    selectedCategory === 4
       ? tasks
       : tasks?.filter((task) => task.category === selectedCategory);
 
@@ -188,9 +188,9 @@ const App = () => {
         <div className="tabs">
           <button
             style={{
-              backgroundColor: selectedCategory == 0 ? "lightgreen" : "white",
+              backgroundColor: selectedCategory == 4 ? "lightgreen" : "white",
             }}
-            onClick={() => handleTabChange(0)}
+            onClick={() => handleTabChange(4)}
           >
             All
           </button>
@@ -219,6 +219,14 @@ const App = () => {
             onClick={() => handleTabChange(3)}
           >
             Leisure
+          </button>
+          <button
+            style={{
+              backgroundColor: selectedCategory == 0 ? "lightgreen" : "white",
+            }}
+            onClick={() => handleTabChange(0)}
+          >
+            None
           </button>
         </div>
         <div className="table-container">
