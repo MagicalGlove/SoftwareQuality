@@ -2,6 +2,8 @@ import { Entity, ObjectId, ObjectIdColumn, Column } from 'typeorm';
 
 @Entity()
 export class Task {
+
+
   @ObjectIdColumn() 
   id!: ObjectId;
 
@@ -9,7 +11,7 @@ export class Task {
   text!: string;
 
   @Column()
-  deadline!: Date | null;
+  deadline!: string | undefined;
 
   @Column()
   isCompleted!: boolean;

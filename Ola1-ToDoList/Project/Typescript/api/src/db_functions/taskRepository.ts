@@ -71,4 +71,4 @@ async function changeCompleteStateTask(id: string, isCompleted: boolean) {
   }
 }
 
-export { createTask, getAllTasks, deleteTask, editTask, changeCompleteStateTask };
+export { createTask, getAllTasks, deleteTask, editTask, changeCompleteStateTask,taskRepository };
