@@ -8,7 +8,7 @@ jest.mock("../api/tasks", () => ({
 
 describe("addTask", () => {
   it("should return the newly added task", async () => {
-    const mockTask: Task = { id: "2", text: "Second Task" };
+    const mockTask: Task = { id: "2", text: "Second Task", };
     (api.addTaskAPI as jest.Mock).mockResolvedValue(mockTask);
 
     const newTask = { text: "Second Task" };

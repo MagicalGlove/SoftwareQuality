@@ -28,8 +28,9 @@ async function getAllTasks() {
   return tasks;
 }
 
-async function editTask(id: ObjectId, _task: Task) {
-  const task = await taskRepository.findOne({ where: { _id: id } });
+async function editTask(id: string, _task: Task) {
+  const objectId = new ObjectId(id);
+  const task = await taskRepository.findOne({ where: { _id: objectId } });
   if (!task) {
     throw new Error('Task not found');
   } else {
@@ -42,6 +43,7 @@ async function editTask(id: ObjectId, _task: Task) {
 
 async function deleteTask(id: string) {
 
+
   const objectId = new ObjectId(id);
   const task = await taskRepository.findOne({ where: { _id: objectId } });
 
@@ -53,9 +55,6 @@ async function deleteTask(id: string) {
     return task;
   }
 }
-
-
-export { createTask, getAllTasks, deleteTask, editTask };
 
 async function changeCompleteStateTask(id: string, isCompleted: boolean) {
   const objectId = new ObjectId(id);
@@ -71,5 +70,6 @@ async function changeCompleteStateTask(id: string, isCompleted: boolean) {
   }
 }
 
-export { createTask, getAllTasks, deleteTask, changeCompleteStateTask };
+
+export { createTask, getAllTasks, deleteTask, editTask, changeCompleteStateTask };
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllTasksAPI } from "./api/tasks";
+import { editTaskAPI, getAllTasksAPI } from "./api/tasks";
 import { Task } from "./types/tasks";
 import { deleteTask } from "./utils/deleteTask";
 import { completedTask } from "./utils/completedTask";
@@ -39,6 +39,20 @@ const App = () => {
   useEffect(() => {
     fetchTasks();
   }, []);
+
+  const handleEditTask = async (e: React.ChangeEvent<HTMLSelectElement>, task: Task) => {
+    try {
+      const editedTask = {
+        ...task,
+        category: parseInt(e.target.value)
+      };
+      console.log(editedTask)
+      const updatedTask = await editTaskAPI(editedTask);
+      console.log("Updated task:", updatedTask);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
+  };
 
   async function handleButtonClick(id: string | undefined): Promise<void> {
     if (!id) return;
@@ -106,6 +120,7 @@ const App = () => {
               <tr>
                 <th className="table-cell table-cell-header">Text</th>
                 <th className="table-cell table-cell-header">Deadline</th>
+                <th className="table-cell table-cell-header">Set category</th>
                 <th className="table-cell table-cell-header">Completed</th>
                 <th className="table-cell table-cell-header">Delete</th>
               </tr>
@@ -115,6 +130,12 @@ const App = () => {
                 <tr key={task.id}>
                   <td className="table-cell">{task.text}</td>
                   <td className="table-cell">{task.deadline || "-"}</td>
+                  <td className="table-cell"><select value={task.category} onChange={(e) => handleEditTask(e, task)}>
+    <option value="0">None</option>
+    <option value="1">Work</option>
+    <option value="2">Chores</option>
+    <option value="3">Leisure</option>
+  </select></td>
                   <td className="table-cell">
                     <img
                       src={task.isCompleted ? checkmark : xMark}
