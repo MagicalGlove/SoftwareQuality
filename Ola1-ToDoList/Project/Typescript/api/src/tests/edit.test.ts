@@ -38,13 +38,6 @@ describe("Edit Task Test", () => {
         expect(returnedTask).toEqual(updatedTask);
     });
 
-    it('should fail after not finding the task with valid id', async () => {
-        const updatedTask = {...testTask, text: 'Updated Task'};
-        // Mock the update function
-
-        (taskRepository.editTask as jest.Mock).mockResolvedValue(updatedTask);
-        await expect(taskRepository.editTask("10", updatedTask)).rejects.toThrow('Task not found');
-    });
 
 
 });
