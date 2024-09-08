@@ -27,16 +27,20 @@ const App = () => {
     }
   };
 
-  const handleAddTask = () => {
-    const newTask: Task = {
-      text: text,
-      isCompleted: false,
-      ...(deadline && { deadline: deadline }),
-    };
-    addTask(newTask);
-    setText("");
-    setDeadline("");
-    fetchTasks();
+  const handleAddTask = async () => {
+    try {
+      const newTask: Task = {
+        text: text,
+        isCompleted: false,
+        ...(deadline && { deadline: deadline }),
+      };
+      await addTask(newTask);
+      setText("");
+      setDeadline("");
+      await fetchTasks();
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
   };
 
   useEffect(() => {
@@ -147,6 +151,7 @@ const App = () => {
           />
           <input
             type="text"
+            id="c-task-text"
             placeholder="Task Text"
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -154,6 +159,7 @@ const App = () => {
           />
           <input
             type="date"
+            id="c-task-date"
             placeholder="Task Deadline"
             value={deadline}
             onChange={(e) => setDeadline(e.target.value)}
@@ -174,6 +180,7 @@ const App = () => {
             style={{ backgroundColor: "lightgreen", borderRadius: "8px" }}
             className="add-task-button"
             onClick={handleAddTask}
+            id="c-add-button"
           >
             Add Task
           </button>
@@ -188,6 +195,7 @@ const App = () => {
             All
           </button>
           <button
+            id="c-work-tab"
             style={{
               backgroundColor: selectedCategory == 1 ? "lightgreen" : "white",
             }}
@@ -196,6 +204,7 @@ const App = () => {
             Work
           </button>
           <button
+            id="c-chores-tab"
             style={{
               backgroundColor: selectedCategory == 2 ? "lightgreen" : "white",
             }}
@@ -256,6 +265,7 @@ const App = () => {
                   </td>
                   <td className="table-cell">
                     <button
+                      id={`c-delete-button-${task.id}`}
                       style={{
                         backgroundColor: "red",
                         marginBottom: "10px",
