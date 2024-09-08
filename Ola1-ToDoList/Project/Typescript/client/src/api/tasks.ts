@@ -36,3 +36,18 @@ export const deleteTaskAPI = async (deleteTaskId: string): Promise<Task> => {
   }
   return response.json();
 };
+
+export const completedTaskAPI = async (
+  completedTaskId: string,
+  isCompleted: boolean
+): Promise<Task> => {
+  const response = await fetch(`${baseUrl}/tasks`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: completedTaskId, isCompleted: isCompleted }),
+  });
+  if (!response.ok) {
+    throw new Error("Failed to change completion state of task");
+  }
+  return response.json();
+};

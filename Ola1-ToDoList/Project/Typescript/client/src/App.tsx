@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllTasksAPI } from "./api/tasks";
 import { Task } from "./types/tasks";
 import { deleteTask } from "./utils/deleteTask";
+import { completedTask } from "./utils/completedTask";
 import { addTask } from "./utils/addTask";
 import "./App.css";
 import checkmark from "./misc/Checkmark.png";
@@ -11,6 +12,7 @@ const App = () => {
   const [tasks, setTasks] = useState<Task[]>();
   const [text, setText] = useState<string>("");
   const [deadline, setDeadline] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<number>(0);
 
   const fetchTasks = async () => {
     try {
@@ -49,6 +51,27 @@ const App = () => {
     }
   }
 
+  async function handleImageClick(
+    id: string | undefined,
+    isCompleted: boolean | undefined
+  ): Promise<void> {
+    if (!id || typeof isCompleted !== "boolean") return;
+    try {
+      await completedTask(id, isCompleted);
+      console.log("Task completed/uncompleted:", id);
+      await fetchTasks();
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  }
+  const handleTabChange = (category: number) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredTasks = selectedCategory === 0 
+    ? tasks 
+    : tasks?.filter(task => task.category === selectedCategory);
+
   return (
     <div className="App">
       <div className="container">
@@ -71,6 +94,12 @@ const App = () => {
             Add Task
           </button>
         </div>
+        <div className="tabs">
+          <button onClick={() => handleTabChange(0)}>All</button>
+          <button onClick={() => handleTabChange(1)}>Work</button>
+          <button onClick={() => handleTabChange(2)}>Chores</button>
+          <button onClick={() => handleTabChange(3)}>Leisure</button>
+        </div>
         <div className="table-container">
           <table className="table-content">
             <thead>
@@ -82,7 +111,7 @@ const App = () => {
               </tr>
             </thead>
             <tbody>
-              {tasks?.map((task) => (
+              {filteredTasks?.map((task) => (
                 <tr key={task.id}>
                   <td className="table-cell">{task.text}</td>
                   <td className="table-cell">{task.deadline || "-"}</td>
@@ -93,12 +122,20 @@ const App = () => {
                       style={{
                         width: "30px",
                         height: "30px",
+                        cursor: "pointer",
                       }}
+                      onClick={
+                        () => handleImageClick(task.id, !task.isCompleted) //Changes to the opposite of what it currently is
+                      }
                     />
                   </td>
                   <td className="table-cell">
                     <button
-                      style={{ backgroundColor: "red", marginBottom: "10px" }}
+                      style={{
+                        backgroundColor: "red",
+                        marginBottom: "10px",
+                        cursor: "pointer",
+                      }}
                       onClick={() => handleButtonClick(task.id)}
                     >
                       Delete

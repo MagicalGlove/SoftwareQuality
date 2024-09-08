@@ -41,17 +41,35 @@ async function editTask(id: ObjectId, _task: Task) {
 }
 
 async function deleteTask(id: string) {
-  const objectId = new ObjectId(id); // Convert the string id to ObjectId
+
+  const objectId = new ObjectId(id);
   const task = await taskRepository.findOne({ where: { _id: objectId } });
 
   if (!task) {
     throw new Error("Task not found");
   } else {
-    await taskRepository.remove(task); // Delete the task from the database
+    await taskRepository.remove(task);
     console.log("Task has been deleted:", task);
     return task;
   }
 }
 
+
 export { createTask, getAllTasks, deleteTask, editTask };
+
+async function changeCompleteStateTask(id: string, isCompleted: boolean) {
+  const objectId = new ObjectId(id);
+
+  const task = await taskRepository.findOne({ where: { _id: objectId } });
+  if (!task) {
+    throw new Error("Task not found");
+  } else {
+    task.isCompleted = isCompleted;
+    await taskRepository.save(task);
+    console.log("Complete state has been updated:", task);
+    return task;
+  }
+}
+
+export { createTask, getAllTasks, deleteTask, changeCompleteStateTask };
 
