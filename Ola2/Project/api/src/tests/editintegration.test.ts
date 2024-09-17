@@ -57,33 +57,7 @@ describe('MongoDB Connection Test', () => {
 
 
 
-describe("edit integration tests", () => {
 
-    let dummyTask: Task = {
-        id: new ObjectId("66dd91c906cded5f17cc8cfe"),
-        text: 'Test Task',
-        deadline: undefined,
-        isCompleted: false,
-        category: 0
-    };
-    beforeAll(async () => {
-        await AppDataSource.initialize();
-        await taskRepository.taskRepository.save(dummyTask);
-
-    });
-    // After all tests, close the connection
-    afterAll(async () => {
-        await taskRepository.taskRepository.clear()
-        await AppDataSource.destroy();
-    });
-
-    it('should make call the database function and edit a task', async () => {
-
-        const updatedTask = {...dummyTask, text: 'Updated Task'};
-        const result = await taskRepository.editTask(dummyTask.id.toString(), updatedTask);
-        expect(result).toEqual(updatedTask);
-    });
-});
 
 describe("add integration tests", () => {
 

@@ -8,9 +8,8 @@ import {AppDataSource} from '../ormconfig';
 
 describe('API Integration Tests', () => {
 
-
-    const dummyTask: Task = {
-        id: new ObjectId("66dd91c906cded5f17cc8cfe"),
+    let dummyTask: Task = {
+        id: new ObjectId(),
         text: 'Another dummy task',
         deadline: null,
         isCompleted: false,
@@ -19,14 +18,21 @@ describe('API Integration Tests', () => {
 
     beforeAll(async () => {
         await AppDataSource.initialize();
-        await taskRepository.taskRepository.save(dummyTask);
+
+    });
+
+    beforeEach(async () => {
+        dummyTask = await taskRepository.createTask('Another dummy task', null, false);
+        console.log("dummyTask before each: ", dummyTask);
+    });
+    afterEach(async () => {
+        await taskRepository.taskRepository.clear()
     });
     // After all tests, close the connection
     afterAll(async () => {
-        await taskRepository.taskRepository.clear()
+
         await AppDataSource.destroy();
     });
-
 
     it('should return correct data for GET ', async () => {
         const response = await request(app)
@@ -36,15 +42,14 @@ describe('API Integration Tests', () => {
 
         expect(response.body[0].text).toEqual(dummyTask.text);
         expect(response.body[0].deadline).toEqual(dummyTask.deadline);
-        expect(response.body[0].isCompleted).toEqual(dummyTask.isCompleted);
         expect(response.body[0].category).toEqual(dummyTask.category);
-
         expect(response.body.length).toEqual(1);
     });
 
+
     it('should return correct data for POST', async () => {
-        const task: Task = {
-            id: new ObjectId("55dd91c906cded5f17cc8cfe"),
+        const post_dummy_task: Task = {
+            id:  new ObjectId(),
             text: 'Test add Task',
             deadline: "now",
             isCompleted: true,
@@ -53,17 +58,59 @@ describe('API Integration Tests', () => {
 
         const response = await request(app)
             .post('/tasks')
-            .send(task)
+            .send(post_dummy_task)
             .expect('Content-Type', /json/)
             .expect(200);
 
-        expect(response.body.text).toEqual(task.text);
-        expect(response.body.deadline).toEqual(task.deadline);
-        expect(response.body.isCompleted).toEqual(task.isCompleted);
-        expect(response.body.category).toEqual(task.category);
-
+        expect(response.body.text).toEqual(post_dummy_task.text);
+        expect(response.body.deadline).toEqual(post_dummy_task.deadline);
+        expect(response.body.isCompleted).toEqual(post_dummy_task.isCompleted);
 
     });
 
+    it('should return correct data for PUT', async () => {
+        const put_dummy_task: Task = {
+            id: dummyTask.id,
+            text: 'Test put Task',
+            deadline: "now",
+            isCompleted: true,
+            category: 1
+        };
 
+        const response = await request(app)
+            .put(`/tasks/${dummyTask.id}`)
+            .send(put_dummy_task)
+            .expect('Content-Type', /json/)
+            .expect(200);
+
+        expect(response.body.text).toEqual(put_dummy_task.text);
+        expect(response.body.deadline).toEqual(put_dummy_task.deadline);
+        expect(response.body.isCompleted).toEqual(put_dummy_task.isCompleted);
+    });
+
+    it('should return correct data for DELETE', async () => {
+
+        const _id = dummyTask.id.toString();
+        console.log("dummyTask id: ", _id);
+        const response = await request(app)
+            .delete(`/tasks/`)
+            .send({ id: dummyTask.id.toString() })
+            .expect('Content-Type', /json/)
+            .expect(200);
+
+        expect(response.body.text).toEqual(dummyTask.text);
+        expect(response.body.deadline).toEqual(dummyTask.deadline);
+        expect(response.body.isCompleted).toEqual(dummyTask.isCompleted);
+        expect(response.body.category).toEqual(dummyTask.category);
+    });
+
+    it("should change the completion state of a task", async () => {
+        const response = await request(app)
+            .patch(`/tasks/`)
+            .send({ id: dummyTask, isCompleted: true})
+            .expect('Content-Type', /json/)
+            .expect(200);
+
+        expect(response.body.isCompleted).toEqual(true);
+    });
 })

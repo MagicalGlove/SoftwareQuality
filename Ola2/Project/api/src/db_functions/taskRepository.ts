@@ -29,7 +29,7 @@ async function getAllTasks() {
   return tasks;
 }
 
-async function editTask(id: string, _task: Task) {
+async function editTask(id: string | undefined, _task: Task) {
   const objectId = new ObjectId(id);
   const task = await taskRepository.findOne({ where: { _id: objectId } });
   if (!task) {
@@ -38,6 +38,7 @@ async function editTask(id: string, _task: Task) {
     task.text = _task.text;
     task.category = _task.category;
     task.deadline = _task.deadline;
+    task.isCompleted = _task.isCompleted;
     await taskRepository.save(task);
     console.log("Task has been updated:", task);
     return task;

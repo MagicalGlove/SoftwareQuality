@@ -5,7 +5,7 @@ export class Task {
 
 
   @ObjectIdColumn() 
-  id!: ObjectId;
+  id!: ObjectId ;
 
   @Column()
   text!: string;
