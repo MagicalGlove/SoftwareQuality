@@ -40,6 +40,7 @@
     "mongodb": "^5.9.2",
     "reflect-metadata": "^0.2.2",
     "stryker": "^0.35.1",
+    "supertest": "^7.0.0",
     "typeorm": "^0.3.20"
   }
 }
