@@ -22,6 +22,18 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Task.prototype, "text", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Object)
+], Task.prototype, "deadline", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Boolean)
+], Task.prototype, "isCompleted", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Task.prototype, "category", void 0);
 exports.Task = Task = __decorate([
     (0, typeorm_1.Entity)()
 ], Task);

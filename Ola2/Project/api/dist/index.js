@@ -19,17 +19,72 @@ const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const port = 3001;
 app.use((0, cors_1.default)());
+app.use(express_1.default.json());
 ormconfig_1.AppDataSource.initialize()
     .then(() => {
-    console.log('Data Source has been initialized!');
-    app.get('/tasks', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Data Source has been initialized!");
+    app.get("/tasks", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const tasks = yield (0, taskRepository_1.getAllTasks)();
             res.json(tasks);
         }
         catch (error) {
-            console.error('Error fetching tasks:', error);
-            res.status(500).json({ error: 'An error occurred while fetching tasks' });
+            console.error("Error fetching tasks:", error);
+            res
+                .status(500)
+                .json({ error: "An error occurred while fetching tasks" });
+        }
+    }));
+    app.post("/tasks", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { text, deadline, isCompleted } = req.body;
+            const task = yield (0, taskRepository_1.createTask)(text, deadline, isCompleted);
+            res.json(task);
+        }
+        catch (error) {
+            console.error("Error fetching tasks:", error);
+            res
+                .status(500)
+                .json({ error: "An error occurred while fetching tasks" });
+        }
+    }));
+    app.put('/tasks/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { id } = req.params;
+            const updatedTask = req.body;
+            console.log("Preupdate:", updatedTask);
+            const task = yield (0, taskRepository_1.editTask)(id, updatedTask);
+            res.json(task);
+        }
+        catch (error) {
+            console.error('Error updating task:', error);
+            res.status(500).json({ error: 'An error occurred while updating task' });
+        }
+    }));
+    app.delete("/tasks", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { id } = req.body;
+            const tasks = yield (0, taskRepository_1.deleteTask)(id);
+            res.json(tasks);
+        }
+        catch (error) {
+            console.error("Error deleting task:", error);
+            res
+                .status(500)
+                .json({ error: "An error occurred while deleting task" });
+        }
+    }));
+    app.patch("/tasks", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { id, isCompleted } = req.body;
+            const tasks = yield (0, taskRepository_1.changeCompleteStateTask)(id, isCompleted);
+            res.json(tasks);
+        }
+        catch (error) {
+            console.error("Error changing completion state of task:", error);
+            res
+                .status(500)
+                .json({ error: "An error occurred while deleting task" });
         }
     }));
     app.listen(port, () => {
@@ -37,5 +92,6 @@ ormconfig_1.AppDataSource.initialize()
     });
 })
     .catch((err) => {
-    console.error('Error during Data Source initialization:', err);
+    console.error("Error during Data Source initialization:", err);
 });
+exports.default = app;

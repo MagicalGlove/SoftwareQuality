@@ -7,14 +7,15 @@ import {ObjectId} from "mongodb";
 const taskRepository = AppDataSource.getMongoRepository(Task);
 
 async function createTask(
-  text: string,
-  deadline: string | undefined,
-  isCompleted: boolean | undefined
+    text: string,
+    deadline: string | undefined | null,
+    isCompleted: boolean | undefined
 ) {
   const newTask = taskRepository.create({
     text: text,
     deadline: deadline,
     isCompleted: isCompleted,
+
   });
 
   const task = await taskRepository.save(newTask);
