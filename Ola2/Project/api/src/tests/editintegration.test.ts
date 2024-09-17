@@ -4,7 +4,9 @@ import * as taskRepository from '../db_functions/taskRepository';
 import {Task} from '../entities/Task';
 import {ObjectId} from 'mongodb';
 import {AppDataSource} from '../ormconfig';
-
+import {describe} from "node:test";
+import app from "../index";
+import request from "supertest";
 
 dotenv.config();
 
@@ -54,9 +56,6 @@ describe('MongoDB Connection Test', () => {
 
 });
 
-
-
-
 describe("edit integration tests", () => {
 
     let dummyTask: Task = {
@@ -86,8 +85,6 @@ describe("edit integration tests", () => {
 });
 
 describe("add integration tests", () => {
-
-
     beforeAll(async () => {
         await AppDataSource.initialize();
     });
