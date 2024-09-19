@@ -7,9 +7,6 @@ import {AppDataSource} from "../ormconfig";
 import * as taskRepository from '../db_functions/taskRepository';
 
 describe("API get", () => {
-
-
-
     test("Get", async () => {
         const res = await request(app).get("/tasks");
         expect(res.statusCode).toEqual(200);
