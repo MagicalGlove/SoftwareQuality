@@ -122,10 +122,18 @@ const App = () => {
     }
   }
 
-  const filteredTasks =
-    selectedCategory === 4
-      ? tasks
-      : tasks?.filter((task) => task.category === selectedCategory);
+  const filteredTasks = tasks?.filter((task) => {
+    if (selectedCategory === 4) {
+      return true;
+    }
+    
+    if (selectedCategory === 0 && !task.category) {
+      return true;
+    }
+    
+    return task.category === selectedCategory;
+  });
+  
 
   return (
     <div className="App">
@@ -185,7 +193,7 @@ const App = () => {
         <div className="tabs">
           <button
             style={{
-              backgroundColor: selectedCategory == 4 ? "lightgreen" : "white",
+              backgroundColor: selectedCategory === 4 ? "lightgreen" : "white",
             }}
             onClick={() => handleTabChange(4)}
           >
@@ -194,7 +202,7 @@ const App = () => {
           <button
             id="c-work-tab"
             style={{
-              backgroundColor: selectedCategory == 1 ? "lightgreen" : "white",
+              backgroundColor: selectedCategory === 1 ? "lightgreen" : "white",
             }}
             onClick={() => handleTabChange(1)}
           >
@@ -203,7 +211,7 @@ const App = () => {
           <button
             id="c-chores-tab"
             style={{
-              backgroundColor: selectedCategory == 2 ? "lightgreen" : "white",
+              backgroundColor: selectedCategory === 2 ? "lightgreen" : "white",
             }}
             onClick={() => handleTabChange(2)}
           >
@@ -211,7 +219,7 @@ const App = () => {
           </button>
           <button
             style={{
-              backgroundColor: selectedCategory == 3 ? "lightgreen" : "white",
+              backgroundColor: selectedCategory === 3 ? "lightgreen" : "white",
             }}
             onClick={() => handleTabChange(3)}
           >
@@ -219,7 +227,7 @@ const App = () => {
           </button>
           <button
             style={{
-              backgroundColor: selectedCategory == 0 ? "lightgreen" : "white",
+              backgroundColor: selectedCategory === 0 ? "lightgreen" : "white",
             }}
             onClick={() => handleTabChange(0)}
           >
