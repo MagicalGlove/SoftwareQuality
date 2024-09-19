@@ -86,6 +86,7 @@ AppDataSource.initialize()
                     .json({error: "An error occurred while deleting task"});
             }
         });
+
         if (process.env.Node_ENV !== "test") {
             app.listen(port, () => {
                 console.log(`Server is running at http://localhost:${port}`);

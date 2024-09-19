@@ -11,7 +11,7 @@ describe('API Integration Tests', () => {
     let dummyTask: Task = {
         id: new ObjectId(),
         text: 'Another dummy task',
-        deadline: null,
+        deadline: "NOW",
         isCompleted: false,
         category: 0
     };
@@ -22,7 +22,7 @@ describe('API Integration Tests', () => {
 
     beforeEach(async () => {
         await taskRepository.taskRepository.clear()
-        dummyTask = await taskRepository.createTask('Another dummy task', null, false);
+        dummyTask = await taskRepository.createTask('Another dummy task', dummyTask.deadline, dummyTask.isCompleted);
         console.log("dummyTask before each: ", dummyTask);
     });
     afterEach(async () => {

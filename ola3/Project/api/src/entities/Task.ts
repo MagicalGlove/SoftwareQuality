@@ -11,7 +11,7 @@ export class Task {
   text!: string;
 
   @Column()
-  deadline!: string | undefined | null;
+  deadline!: string | null;
 
   @Column()
   isCompleted!: boolean;

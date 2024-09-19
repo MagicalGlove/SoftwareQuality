@@ -1,14 +1,14 @@
 import {AppDataSource} from '../ormconfig';
 import {Task} from '../entities/Task';
 import {ObjectId} from "mongodb";
-import {checkAddTaskBoundary} from './logicChecks';
+import {checkAddTaskBoundary, checkTaskBoundary} from './logicChecks';
 
 const taskRepository = AppDataSource.getMongoRepository(Task);
 
 async function createTask(
     text: string,
-    deadline: string | undefined | null,
-    isCompleted: boolean | undefined
+    deadline: string |  null,
+    isCompleted: boolean
 ) {
 
     checkAddTaskBoundary(text, deadline, isCompleted);
@@ -33,15 +33,20 @@ async function getAllTasks() {
 
 async function editTask(id: string | undefined, _task: Task) {
     const objectId = new ObjectId(id);
+
     const task = await taskRepository.findOne({where: {_id: objectId}});
     if (!task) {
         throw new Error('Task not found');
-    } else {
+    }
+    else {
+        checkTaskBoundary(_task);
+
         task.text = _task.text;
         task.category = _task.category;
         task.deadline = _task.deadline;
         task.isCompleted = _task.isCompleted;
         await taskRepository.save(task);
+
         console.log("Task has been updated:", task);
         return task;
     }
