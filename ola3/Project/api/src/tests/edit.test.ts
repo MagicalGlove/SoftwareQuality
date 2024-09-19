@@ -1,9 +1,7 @@
 import dotenv from "dotenv";
-import {DataSource} from 'typeorm';
 import * as taskRepository from '../db_functions/taskRepository';
 import {Task} from '../entities/Task';
 import {ObjectId} from 'mongodb';
-import {AppDataSource} from '../ormconfig';
 
 jest.mock('../db_functions/taskRepository');
 

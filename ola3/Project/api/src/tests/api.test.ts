@@ -14,7 +14,7 @@ describe("API get", () => {
 });
 
 describe("API post", () => {
-    let dummyTask: Task = {
+    const dummyTask: Task = {
         id: new ObjectId("66dd91c906cded5f17cc8cfe"),
         text: 'Test Task',
         deadline: undefined,
@@ -31,7 +31,7 @@ describe("API post", () => {
 });
 
 describe("API put", () => {
-    let dummyTask: Task = {
+    const dummyTask: Task = {
         id: new ObjectId("66dd91c906cded5f17cc8cfe"),
         text: 'Test Task',
         deadline: undefined,
@@ -46,7 +46,7 @@ describe("API put", () => {
 
     // After all tests, close the connection
     afterAll(async () => {
-        await taskRepository.taskRepository.clear()
+        await taskRepository.taskRepository.clear();
         await AppDataSource.destroy();
     });
 
