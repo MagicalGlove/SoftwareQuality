@@ -9,6 +9,9 @@ export class Task {
 
   @Column()
   text!: string;
+  
+  @Column()
+  description!: string;
 
   @Column()
   deadline!: string | undefined | null;

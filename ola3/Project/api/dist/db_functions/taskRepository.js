@@ -18,12 +18,15 @@ exports.changeCompleteStateTask = changeCompleteStateTask;
 const ormconfig_1 = require("../ormconfig");
 const Task_1 = require("../entities/Task");
 const mongodb_1 = require("mongodb");
+const logicChecks_1 = require("./logicChecks");
 const taskRepository = ormconfig_1.AppDataSource.getMongoRepository(Task_1.Task);
 exports.taskRepository = taskRepository;
-function createTask(text, deadline, isCompleted) {
+function createTask(text, description, deadline, isCompleted) {
     return __awaiter(this, void 0, void 0, function* () {
+        (0, logicChecks_1.checkAddTaskBoundary)(text, deadline, isCompleted);
         const newTask = taskRepository.create({
             text: text,
+            description: description,
             deadline: deadline,
             isCompleted: isCompleted,
         });
@@ -48,8 +51,10 @@ function editTask(id, _task) {
         }
         else {
             task.text = _task.text;
+            task.description = _task.description;
             task.category = _task.category;
             task.deadline = _task.deadline;
+            task.isCompleted = _task.isCompleted;
             yield taskRepository.save(task);
             console.log("Task has been updated:", task);
             return task;

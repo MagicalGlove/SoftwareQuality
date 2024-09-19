@@ -10,6 +10,7 @@ describe("editTask", () => {
     const updatedTask: Task = {
         id: '2',
         text: 'Updated Task',
+        description: 'description',
         category: TASK_CATEGORIES.WORK,
         isCompleted: false,
       };

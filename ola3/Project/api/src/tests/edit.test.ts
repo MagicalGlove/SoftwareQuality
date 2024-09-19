@@ -16,6 +16,7 @@ describe("Edit Task Test", () => {
     const dummyTask: Task = {
         id: new ObjectId("66dd91c906cded5f17cc8cfe"),
         text: 'Test Task',
+        description: 'description',
         deadline: undefined,
         isCompleted: false,
         category: 0
@@ -24,7 +25,7 @@ describe("Edit Task Test", () => {
     beforeEach(async () => {
         // Create a new task
         (taskRepository.createTask as jest.Mock).mockResolvedValue(dummyTask);
-        testTask = await taskRepository.createTask('Test Task', undefined, false);
+        testTask = await taskRepository.createTask('Test Task', 'description', undefined, false);
 
     });
 

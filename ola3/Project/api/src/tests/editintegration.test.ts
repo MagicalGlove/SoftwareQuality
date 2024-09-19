@@ -76,12 +76,13 @@ describe("add integration tests", () => {
         const task: Task = {
             id: new ObjectId("55dd91c906cded5f17cc8cfe"),
             text: 'Test add Task',
+            description: 'description',
             deadline: "NOW",
             isCompleted: false,
             category: 0
         };
 
-        const result = await taskRepository.createTask(task.text, task.deadline, task.isCompleted);
+        const result = await taskRepository.createTask(task.text, task.description, task.deadline, task.isCompleted);
 
         expect(result.text).toEqual(task.text);
         expect(result.deadline).toEqual(task.deadline);

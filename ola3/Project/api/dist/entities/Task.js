@@ -24,6 +24,10 @@ __decorate([
 ], Task.prototype, "text", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Task.prototype, "description", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
     __metadata("design:type", Object)
 ], Task.prototype, "deadline", void 0);
 __decorate([

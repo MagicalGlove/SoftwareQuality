@@ -10,10 +10,10 @@ describe("addTask", () => {
 
   it("should return the newly added task", async () => {
     
-    const mockTask: Task = { id: "2", text: "Second Task", };
+    const mockTask: Task = { id: "2", text: "Second Task", description: 'description'};
     (api.addTaskAPI as jest.Mock).mockResolvedValue(mockTask);
 
-    const newTask = { text: "Second Task" };
+    const newTask = { text: "Second Task", description: "description" };
 
     const returnedTask = await addTask(newTask);
 
@@ -27,7 +27,7 @@ describe("addTask", () => {
       new Error("Failed to add task")
     );
 
-    const newTask = { text: "Failed Task" };
+    const newTask = { text: "Failed Task", description: 'description' };
 
     await expect(addTask(newTask)).rejects.toThrow("Failed to add task");
     expect(api.addTaskAPI).toHaveBeenCalledWith(newTask);

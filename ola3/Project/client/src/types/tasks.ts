@@ -1,7 +1,8 @@
 export type Task = {
   id?: string;
   text: string;
-
+  description: string;
+  
   deadline?: string | null;
   isCompleted?: boolean;
   category?: TASK_CATEGORIES;

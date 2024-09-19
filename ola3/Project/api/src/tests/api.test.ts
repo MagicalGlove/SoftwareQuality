@@ -17,6 +17,7 @@ describe("API post", () => {
     let dummyTask: Task = {
         id: new ObjectId("66dd91c906cded5f17cc8cfe"),
         text: 'Test Task',
+        description: 'description',
         deadline: undefined,
         isCompleted: false,
         category: 0
@@ -34,6 +35,7 @@ describe("API put", () => {
     let dummyTask: Task = {
         id: new ObjectId("66dd91c906cded5f17cc8cfe"),
         text: 'Test Task',
+        description: 'description',
         deadline: undefined,
         isCompleted: false,
         category: 0

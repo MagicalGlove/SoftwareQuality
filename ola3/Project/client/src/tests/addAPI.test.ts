@@ -2,7 +2,7 @@ import { addTaskAPI } from "../api/tasks";
 import { Task } from "../types/tasks";
 
 describe("addTaskAPI", () => {
-  const mockTask: Task = { id: "1", text: "Test task" };
+  const mockTask: Task = { id: "1", text: "Test task", description: 'description' };
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -16,7 +16,7 @@ describe("addTaskAPI", () => {
       })
     ) as jest.Mock;
 
-    const result = await addTaskAPI({ text: "Test task" });
+    const result = await addTaskAPI({ text: "Test task", description: 'description' });
     expect(result).toEqual(mockTask);
     expect(global.fetch).toHaveBeenCalledWith("http://localhost:3001/tasks", {
       method: "POST",
@@ -32,7 +32,7 @@ describe("addTaskAPI", () => {
       })
     ) as jest.Mock;
 
-    await expect(addTaskAPI({ text: "Test task" })).rejects.toThrow(
+    await expect(addTaskAPI({ text: "Test task", description: 'description' })).rejects.toThrow(
       "Failed to add task"
     );
     expect(global.fetch).toHaveBeenCalledWith("http://localhost:3001/tasks", {

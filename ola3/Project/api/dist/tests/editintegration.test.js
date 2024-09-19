@@ -77,29 +77,6 @@ describe('MongoDB Connection Test', () => {
         yield expect(WrongDataSource.initialize()).rejects.toThrow();
     }));
 });
-describe("edit integration tests", () => {
-    let dummyTask = {
-        id: new mongodb_1.ObjectId("66dd91c906cded5f17cc8cfe"),
-        text: 'Test Task',
-        deadline: undefined,
-        isCompleted: false,
-        category: 0
-    };
-    beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
-        yield ormconfig_1.AppDataSource.initialize();
-        yield taskRepository.taskRepository.save(dummyTask);
-    }));
-    // After all tests, close the connection
-    afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
-        yield taskRepository.taskRepository.clear();
-        yield ormconfig_1.AppDataSource.destroy();
-    }));
-    it('should make call the database function and edit a task', () => __awaiter(void 0, void 0, void 0, function* () {
-        const updatedTask = Object.assign(Object.assign({}, dummyTask), { text: 'Updated Task' });
-        const result = yield taskRepository.editTask(dummyTask.id.toString(), updatedTask);
-        expect(result).toEqual(updatedTask);
-    }));
-});
 describe("add integration tests", () => {
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield ormconfig_1.AppDataSource.initialize();
@@ -114,11 +91,12 @@ describe("add integration tests", () => {
         const task = {
             id: new mongodb_1.ObjectId("55dd91c906cded5f17cc8cfe"),
             text: 'Test add Task',
+            description: 'description',
             deadline: "NOW",
             isCompleted: false,
             category: 0
         };
-        const result = yield taskRepository.createTask(task.text, task.deadline, task.isCompleted);
+        const result = yield taskRepository.createTask(task.text, task.description, task.deadline, task.isCompleted);
         expect(result.text).toEqual(task.text);
         expect(result.deadline).toEqual(task.deadline);
         expect(result.isCompleted).toEqual(task.isCompleted);
