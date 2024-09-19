@@ -1,6 +1,6 @@
 import {checkAddTaskBoundary} from "../db_functions/logicChecks";
 
-describe("title size", () => {
+describe("title size equivalence", () => {
     const partition1 = [0, 2], partition2 = [3, 100], partition3 = [101, 1000];
 
     test("Partition 1 Invalid", () => {
@@ -47,6 +47,49 @@ describe("title size", () => {
         }
     });
 })
+
+describe("title size boundary", () => {
+    const partition1 = [0, 2], partition2 = [3, 100], partition3 = [101, 1000];
+
+    test("Partition 1 Invalid", () => {
+        for (let i = 0; i < 2; i++) {
+            let testTitle: string = "";
+            for (let j = 0; j < partition1[i]; j++) {
+                testTitle += "x";
+            }
+
+            expect(() => {
+                checkAddTaskBoundary(testTitle, "undefined", false)
+            }).toThrow(Error)
+        }
+    });
+
+    test("Partition 2 Valid", () => {
+        for (let i = 0; i < 2; i++) {
+            let testTitle: string = "";
+            for (let j = 0; j < partition2[i]; j++) {
+                testTitle += "x";
+            }
+
+            expect(() => {
+                checkAddTaskBoundary(testTitle, "undefined", false)
+            }).not.toThrow(Error)
+        }
+    });
+
+    test("Partition 3 Invalid", () => {
+        for (let i = 0; i < 2; i++) {
+            let testTitle: string = "";
+            for (let j = 0; j < partition3[i]; j++) {
+                testTitle += "x";
+            }
+
+            expect(() => {
+                checkAddTaskBoundary(testTitle, "undefined", false)
+            }).toThrow(Error)
+        }
+    });
+});
 
 function getRandomInt(min: number, max: number) {
     const minCeiled = Math.ceil(min);
