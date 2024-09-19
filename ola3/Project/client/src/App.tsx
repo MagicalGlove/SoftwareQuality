@@ -5,9 +5,6 @@ import { deleteTask } from "./utils/deleteTask";
 import { completedTask } from "./utils/completedTask";
 import { addTask } from "./utils/addTask";
 import "./App.css";
-import checkmark from "./misc/Checkmark.png";
-import xMark from "./misc/X-Mark.png";
-import edit from "./misc/Edit.png";
 
 const App = () => {
   const [tasks, setTasks] = useState<Task[]>();
@@ -258,18 +255,18 @@ const App = () => {
                     </select>
                   </td>
                   <td className="table-cell">
-                    <img
-                      src={task.isCompleted ? checkmark : xMark}
-                      alt={task.isCompleted ? "complete" : "incomplete"}
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        cursor: "pointer",
-                      }}
-                      onClick={
-                        () => handleImageClick(task.id, !task.isCompleted) //Changes to the opposite of what it currently is
-                      }
-                    />
+                  <span
+  role="img"
+  aria-label={task.isCompleted ? "complete" : "incomplete"}
+  style={{
+    fontSize: "30px",
+    cursor: "pointer",
+  }}
+  onClick={() => handleImageClick(task.id, !task.isCompleted)}
+>
+  {task.isCompleted ? "✅" : "❌"}
+</span>
+
                   </td>
                   <td className="table-cell">
                     <button
@@ -287,27 +284,29 @@ const App = () => {
                     </button>
                   </td>
                   <td className="table-cell">
-                    <img
-                      src={edit}
-                      alt="Edit"
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => {
-                        setEditTask(task);
-                        setText(task?.text || "N/A");
-                        setDeadline(
-                          task?.deadline ||
-                            (() => {
-                              const today = new Date();
-                              today.setDate(today.getDate() + 7);
-                              return today.toISOString().split("T")[0];
-                            })()
-                        );
-                      }}
-                    />
+                  <span
+  role="img"
+  aria-label="Edit"
+  style={{
+    fontSize: "25px",
+    cursor: "pointer",
+  }}
+  onClick={() => {
+    setEditTask(task);
+    setText(task?.text || "N/A");
+    setDeadline(
+      task?.deadline ||
+        (() => {
+          const today = new Date();
+          today.setDate(today.getDate() + 7);
+          return today.toISOString().split("T")[0];
+        })()
+    );
+  }}
+>
+  ✏️
+</span>
+
                   </td>
                 </tr>
               ))}
