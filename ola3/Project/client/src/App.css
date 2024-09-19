@@ -4,7 +4,6 @@
   align-items: center; /* Center content horizontally */
   justify-content: center; /* Center content vertically */
   background-image: url("https://i.pinimg.com/originals/48/59/b4/4859b40862f4022e450ffa363b60b9eb.gif");
-  animation: rotate 30s linear infinite; /* DELETE THIS LINE */
 }
 
 @keyframes rotate {
