@@ -7,7 +7,9 @@ jest.mock("../api/tasks", () => ({
 }));
 
 describe("addTask", () => {
+
   it("should return the newly added task", async () => {
+    
     const mockTask: Task = { id: "2", text: "Second Task", };
     (api.addTaskAPI as jest.Mock).mockResolvedValue(mockTask);
 
@@ -17,6 +19,7 @@ describe("addTask", () => {
 
     expect(returnedTask).toEqual(mockTask);
     expect(api.addTaskAPI).toHaveBeenCalledWith(newTask);
+
   });
 
   it("should handle API failure gracefully", async () => {
@@ -29,4 +32,5 @@ describe("addTask", () => {
     await expect(addTask(newTask)).rejects.toThrow("Failed to add task");
     expect(api.addTaskAPI).toHaveBeenCalledWith(newTask);
   });
+
 });
