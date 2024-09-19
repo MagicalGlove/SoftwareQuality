@@ -67,12 +67,11 @@ describe("add integration tests", () => {
     });
     // After all tests, close the connection
     afterAll(async () => {
-        await taskRepository.taskRepository.clear()
+        await taskRepository.taskRepository.clear();
         await AppDataSource.destroy();
     });
 
     it('should make an api and add task', async () => {
-        console.log("Test add Task");
         const task: Task = {
             id: new ObjectId("55dd91c906cded5f17cc8cfe"),
             text: 'Test add Task',

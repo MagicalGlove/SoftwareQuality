@@ -8,7 +8,6 @@ import {
     getAllTasks,
 } from "./db_functions/taskRepository";
 import cors from "cors";
-import {ObjectId} from "mongodb";
 
 const app = express();
 const port = 3001;
@@ -18,14 +17,14 @@ app.use(express.json());
 
 AppDataSource.initialize()
     .then(() => {
-        console.log("Data Source has been initialized!");
+        console.log("Data Source has been initialized!"); // eslint-disable-line no-console
 
         app.get("/tasks", async (req: Request, res: Response) => {
             try {
                 const tasks = await getAllTasks();
                 res.json(tasks);
             } catch (error) {
-                console.error("Error fetching tasks:", error);
+                console.error("Error fetching tasks:", error); // eslint-disable-line no-console
                 res
                     .status(500)
                     .json({error: "An error occurred while fetching tasks"});
@@ -38,7 +37,7 @@ AppDataSource.initialize()
                 const task = await createTask(text, deadline, isCompleted);
                 res.json(task);
             } catch (error) {
-                console.error("Error fetching tasks:", error);
+                console.error("Error fetching tasks:", error); // eslint-disable-line no-console
                 res
                     .status(500)
                     .json({error: "An error occurred while fetching tasks"});
@@ -49,12 +48,12 @@ AppDataSource.initialize()
             try {
                 const {id} = req.params;
                 const updatedTask = req.body;
-                console.log("Preupdate:", updatedTask)
+                console.log("Preupdate:", updatedTask); // eslint-disable-line no-console
 
-                const task = await editTask(id, updatedTask)
+                const task = await editTask(id, updatedTask);
                 res.json(task);
             } catch (error) {
-                console.error('Error updating task:', error);
+                console.error('Error updating task:', error); // eslint-disable-line no-console
                 res.status(500).json({error: 'An error occurred while updating task'});
             }
         });
@@ -65,7 +64,7 @@ AppDataSource.initialize()
                 const tasks = await deleteTask(id);
                 res.json(tasks);
             } catch (error) {
-                console.error("Error deleting task:", error);
+                console.error("Error deleting task:", error); // eslint-disable-line no-console
 
                 res
                     .status(500)
@@ -79,7 +78,7 @@ AppDataSource.initialize()
                 const tasks = await changeCompleteStateTask(id, isCompleted);
                 res.json(tasks);
             } catch (error) {
-                console.error("Error changing completion state of task:", error);
+                console.error("Error changing completion state of task:", error); // eslint-disable-line no-console
 
                 res
                     .status(500)
@@ -88,12 +87,12 @@ AppDataSource.initialize()
         });
         if (process.env.Node_ENV !== "test") {
             app.listen(port, () => {
-                console.log(`Server is running at http://localhost:${port}`);
+                console.log(`Server is running at http://localhost:${port}`); // eslint-disable-line no-console
             });
         }
     })
     .catch((err) => {
-        console.error("Error during Data Source initialization:", err);
+        console.error("Error during Data Source initialization:", err); // eslint-disable-line no-console
     });
 
 

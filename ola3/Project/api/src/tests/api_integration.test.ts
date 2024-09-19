@@ -21,12 +21,11 @@ describe('API Integration Tests', () => {
     });
 
     beforeEach(async () => {
-        await taskRepository.taskRepository.clear()
+        await taskRepository.taskRepository.clear();
         dummyTask = await taskRepository.createTask('Another dummy task', null, false);
-        console.log("dummyTask before each: ", dummyTask);
     });
     afterEach(async () => {
-        await taskRepository.taskRepository.clear()
+        await taskRepository.taskRepository.clear();
     });
     // After all tests, close the connection
     afterAll(async () => {
@@ -39,7 +38,7 @@ describe('API Integration Tests', () => {
             .get('/tasks')
             .expect('Content-Type', /json/)
             .expect(200);
-        console.log("response.body: ", response.body);
+        //console.log("response.body: ", response.body);
         //expect(response.body[0].text).toEqual(dummyTask.text);
         expect(response.body[0].deadline).toEqual(dummyTask.deadline);
         expect(response.body[0].category).toEqual(dummyTask.category);
@@ -89,9 +88,6 @@ describe('API Integration Tests', () => {
     });
 
     it('should return correct data for DELETE', async () => {
-
-        const _id = dummyTask.id.toString();
-        console.log("dummyTask id: ", _id);
         const response = await request(app)
             .delete(`/tasks/`)
             .send({ id: dummyTask.id.toString() })
@@ -113,4 +109,4 @@ describe('API Integration Tests', () => {
 
         expect(response.body.isCompleted).toEqual(true);
     });
-})
+});

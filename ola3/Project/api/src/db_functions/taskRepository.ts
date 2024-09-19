@@ -19,13 +19,13 @@ async function createTask(
   });
 
   const task = await taskRepository.save(newTask);
-  console.log("Task has been saved:", newTask);
+  console.log("Task has been saved:", newTask); // eslint-disable-line no-console
   return task;
 }
 
 async function getAllTasks() {
   const tasks = await taskRepository.find();
-  console.log("Found tasks:", tasks);
+  console.log("Found tasks:", tasks); // eslint-disable-line no-console
   return tasks;
 }
 
@@ -40,7 +40,7 @@ async function editTask(id: string | undefined, _task: Task) {
     task.deadline = _task.deadline;
     task.isCompleted = _task.isCompleted;
     await taskRepository.save(task);
-    console.log("Task has been updated:", task);
+    console.log("Task has been updated:", task); // eslint-disable-line no-console
     return task;
   }
 }
@@ -54,7 +54,7 @@ async function deleteTask(id: string) {
     throw new Error("Task not found");
   } else {
     await taskRepository.remove(task);
-    console.log("Task has been deleted:", task);
+    console.log("Task has been deleted:", task); // eslint-disable-line no-console
     return task;
   }
 }
@@ -68,7 +68,7 @@ async function changeCompleteStateTask(id: string, isCompleted: boolean) {
   } else {
     task.isCompleted = isCompleted;
     await taskRepository.save(task);
-    console.log("Complete state has been updated:", task);
+    console.log("Complete state has been updated:", task); // eslint-disable-line no-console
     return task;
   }
 }
