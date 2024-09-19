@@ -35,14 +35,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const dotenv_1 = __importDefault(require("dotenv"));
-const taskRepository = __importStar(require("../db_functions/taskRepository"));
+const node_test_1 = require("node:test");
+const supertest_1 = __importDefault(require("supertest"));
+const index_1 = __importDefault(require("../index"));
 const mongodb_1 = require("mongodb");
-jest.mock('../db_functions/taskRepository');
-dotenv_1.default.config();
-describe("Edit Task Test", () => {
-    let testTask;
-    const dummyTask = {
+const ormconfig_1 = require("../ormconfig");
+const taskRepository = __importStar(require("../db_functions/taskRepository"));
+(0, node_test_1.describe)("API get", () => {
+    test("Get", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield (0, supertest_1.default)(index_1.default).get("/tasks");
+        expect(res.statusCode).toEqual(200);
+    }));
+});
+(0, node_test_1.describe)("API post", () => {
+    let dummyTask = {
         id: new mongodb_1.ObjectId("66dd91c906cded5f17cc8cfe"),
         text: 'Test Task',
         description: 'description',
@@ -50,19 +56,31 @@ describe("Edit Task Test", () => {
         isCompleted: false,
         category: 0
     };
-    beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-        // Create a new task
-        taskRepository.createTask.mockResolvedValue(dummyTask);
-        testTask = yield taskRepository.createTask('Test Task', 'description', undefined, false);
+    test("Post", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield (0, supertest_1.default)(index_1.default).post("/tasks").send(dummyTask);
+        expect(res.statusCode).toEqual(200);
     }));
-    it('should edit the task and return the edited task', () => __awaiter(void 0, void 0, void 0, function* () {
-        const updatedTask = Object.assign(Object.assign({}, testTask), { text: 'Updated Task' });
-        // Mock the update function
-        taskRepository.editTask.mockResolvedValue(updatedTask);
-        if (updatedTask.id === undefined) {
-            throw new Error('Task id is undefined');
-        }
-        const returnedTask = yield taskRepository.editTask(updatedTask.id.toString(), updatedTask);
-        expect(returnedTask).toEqual(updatedTask);
+});
+(0, node_test_1.describe)("API put", () => {
+    let dummyTask = {
+        id: new mongodb_1.ObjectId("66dd91c906cded5f17cc8cfe"),
+        text: 'Test Task',
+        description: 'description',
+        deadline: undefined,
+        isCompleted: false,
+        category: 0
+    };
+    beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield ormconfig_1.AppDataSource.initialize();
+        yield taskRepository.taskRepository.save(dummyTask);
+    }));
+    // After all tests, close the connection
+    afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield taskRepository.taskRepository.clear();
+        yield ormconfig_1.AppDataSource.destroy();
+    }));
+    test("Put", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield (0, supertest_1.default)(index_1.default).put("/tasks/" + dummyTask.id);
+        expect(res.statusCode).toEqual(200);
     }));
 });

@@ -10,6 +10,7 @@ const App = () => {
   const [tasks, setTasks] = useState<Task[]>();
   const [editTask, setEditTask] = useState<Task>();
   const [text, setText] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
   const [deadline, setDeadline] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<number>(4);
   const [editTaskId, setEditTaskId] = useState<string>("");
@@ -29,6 +30,7 @@ const App = () => {
       const newTask: Task = {
         text: text,
         isCompleted: false,
+        description: description,
         ...(deadline && { deadline: deadline }),
       };
       await addTask(newTask);
@@ -51,6 +53,7 @@ const App = () => {
       const editedTask = {
         ...editTask,
         text: text,
+        description: description,
         deadline: deadline,
       };
       console.log(editedTask);
@@ -163,6 +166,14 @@ const App = () => {
             className="input-field"
           />
           <input
+            type="text"
+            id="c-task-description"
+            placeholder="Task description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="input-field"
+          />
+          <input
             type="date"
             id="c-task-date"
             placeholder="Task Deadline"
@@ -239,6 +250,7 @@ const App = () => {
             <thead>
               <tr>
                 <th className="table-cell table-cell-header">Text</th>
+                <th className="table-cell table-cell-header">Description</th>
                 <th className="table-cell table-cell-header">Deadline</th>
                 <th className="table-cell table-cell-header">Set category</th>
                 <th className="table-cell table-cell-header">Completed</th>
@@ -250,6 +262,7 @@ const App = () => {
               {filteredTasks?.map((task) => (
                 <tr key={task.id}>
                   <td className="table-cell">{task.text}</td>
+                  <td className="table-cell">{task.description}</td>
                   <td className="table-cell">{task.deadline || "-"}</td>
                   <td className="table-cell">
                     <select
@@ -302,6 +315,7 @@ const App = () => {
   onClick={() => {
     setEditTask(task);
     setText(task?.text || "N/A");
+    setDescription(task?.description || "N/A");
     setDeadline(
       task?.deadline ||
         (() => {

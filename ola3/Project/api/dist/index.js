@@ -37,8 +37,8 @@ ormconfig_1.AppDataSource.initialize()
     }));
     app.post("/tasks", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const { text, deadline, isCompleted } = req.body;
-            const task = yield (0, taskRepository_1.createTask)(text, deadline, isCompleted);
+            const { text, description, deadline, isCompleted } = req.body;
+            const task = yield (0, taskRepository_1.createTask)(text, description, deadline, isCompleted);
             res.json(task);
         }
         catch (error) {
@@ -87,9 +87,11 @@ ormconfig_1.AppDataSource.initialize()
                 .json({ error: "An error occurred while deleting task" });
         }
     }));
-    app.listen(port, () => {
-        console.log(`Server is running at http://localhost:${port}`);
-    });
+    if (process.env.Node_ENV !== "test") {
+        app.listen(port, () => {
+            console.log(`Server is running at http://localhost:${port}`);
+        });
+    }
 })
     .catch((err) => {
     console.error("Error during Data Source initialization:", err);

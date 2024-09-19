@@ -33,8 +33,8 @@ AppDataSource.initialize()
 
         app.post("/tasks", async (req: Request, res: Response) => {
             try {
-                const {text, deadline, isCompleted} = req.body;
-                const task = await createTask(text, deadline, isCompleted);
+                const {text, description, deadline, isCompleted} = req.body;
+                const task = await createTask(text, description,  deadline, isCompleted);
                 res.json(task);
             } catch (error) {
                 console.error("Error fetching tasks:", error); // eslint-disable-line no-console

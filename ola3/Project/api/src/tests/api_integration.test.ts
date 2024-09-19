@@ -11,6 +11,7 @@ describe('API Integration Tests', () => {
     let dummyTask: Task = {
         id: new ObjectId(),
         text: 'Another dummy task',
+        description: 'description',
         deadline: null,
         isCompleted: false,
         category: 0
@@ -21,8 +22,8 @@ describe('API Integration Tests', () => {
     });
 
     beforeEach(async () => {
-        await taskRepository.taskRepository.clear();
-        dummyTask = await taskRepository.createTask('Another dummy task', null, false);
+        await taskRepository.taskRepository.clear()
+        dummyTask = await taskRepository.createTask('Another dummy task', 'description', null, false);
     });
     afterEach(async () => {
         await taskRepository.taskRepository.clear();
@@ -50,6 +51,7 @@ describe('API Integration Tests', () => {
         const post_dummy_task: Task = {
             id:  new ObjectId(),
             text: 'Test add Task',
+            description: 'description',
             deadline: "now",
             isCompleted: true,
             category: 1
@@ -71,6 +73,7 @@ describe('API Integration Tests', () => {
         const put_dummy_task: Task = {
             id: dummyTask.id,
             text: 'Test put Task',
+            description: 'description',
             deadline: "now",
             isCompleted: true,
             category: 1

@@ -7,14 +7,16 @@ const taskRepository = AppDataSource.getMongoRepository(Task);
 
 async function createTask(
     text: string,
+    description: string,
     deadline: string | undefined | null,
     isCompleted: boolean | undefined
 ) {
 
-    checkAddTaskBoundary(text, deadline, isCompleted);
+    checkAddTaskBoundary(text, description, deadline, isCompleted);
 
     const newTask = taskRepository.create({
         text: text,
+        description: description,
         deadline: deadline,
         isCompleted: isCompleted,
     });
@@ -32,19 +34,20 @@ async function getAllTasks() {
 }
 
 async function editTask(id: string | undefined, _task: Task) {
-  const objectId = new ObjectId(id);
-  const task = await taskRepository.findOne({ where: { _id: objectId } });
-  if (!task) {
-    throw new Error('Task not found');
-  } else {
-    task.text = _task.text;
-    task.category = _task.category;
-    task.deadline = _task.deadline;
-    task.isCompleted = _task.isCompleted;
-    await taskRepository.save(task);
-    console.log("Task has been updated:", task); // eslint-disable-line no-console
-    return task;
-  }
+    const objectId = new ObjectId(id);
+    const task = await taskRepository.findOne({where: {_id: objectId}});
+    if (!task) {
+        throw new Error('Task not found');
+    } else {
+        task.text = _task.text;
+        task.description = _task.description;
+        task.category = _task.category;
+        task.deadline = _task.deadline;
+        task.isCompleted = _task.isCompleted;
+        await taskRepository.save(task);
+        console.log("Task has been updated:", task);// eslint-disable-line no-console
+        return task;
+    }
 }
 
 async function deleteTask(id: string) {

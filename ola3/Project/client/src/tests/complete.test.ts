@@ -13,6 +13,7 @@ describe("completeTask", () => {
     const mockTask: Task = {
       id: mockTaskId,
       text: "Test Task",
+      description: 'description',
       isCompleted: mockIsCompleted,
     };
     (api.completedTaskAPI as jest.Mock).mockResolvedValue(mockTask);
