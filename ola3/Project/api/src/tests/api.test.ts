@@ -12,7 +12,6 @@ describe("API get", () => {
 
     test("Get", async () => {
         const res = await request(app).get("/tasks");
-        console.log(res.statusCode);
         expect(res.statusCode).toEqual(200);
     });
 });
@@ -28,7 +27,6 @@ describe("API post", () => {
 
     test("Post", async () => {
         const res = await request(app).post("/tasks").send(dummyTask);
-        console.log(res.statusCode);
         expect(res.statusCode).toEqual(200);
     });
 
@@ -57,7 +55,6 @@ describe("API put", () => {
 
     test("Put", async () => {
         const res = await request(app).put("/tasks/" + dummyTask.id);
-        console.log(res.statusCode);
         expect(res.statusCode).toEqual(200);
     });
 });
