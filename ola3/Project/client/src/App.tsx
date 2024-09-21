@@ -36,6 +36,7 @@ const App = () => {
       await addTask(newTask);
       setText("");
       setDeadline("");
+      setDescription("");
       await fetchTasks();
     } catch (error) {
       console.error("Error adding task:", error);
@@ -46,9 +47,7 @@ const App = () => {
     fetchTasks();
   }, []);
 
-  const handleEditFullTask = async () => {
-    console.log("Check");
-
+  const handleEditTask = async () => {
     try {
       const editedTask = {
         ...editTask,
@@ -65,7 +64,7 @@ const App = () => {
     }
   };
 
-  const handleEditTask = async (
+  const handleChangeCategory = async (
     e: React.ChangeEvent<HTMLSelectElement>,
     task: Task
   ) => {
@@ -94,7 +93,7 @@ const App = () => {
     }
   }
 
-  async function handleImageClick(
+  async function handleCompleteTask(
     id: string | undefined,
     isCompleted: boolean | undefined
   ): Promise<void> {
@@ -110,20 +109,6 @@ const App = () => {
   const handleTabChange = (category: number) => {
     setSelectedCategory(category);
   };
-
-  async function handleEdit(
-    id: string | undefined,
-    isCompleted: boolean | undefined
-  ): Promise<void> {
-    if (!id || typeof isCompleted !== "boolean") return;
-    try {
-      await completedTask(id, isCompleted);
-      console.log("Task completed/uncompleted:", id);
-      await fetchTasks();
-    } catch (error) {
-      console.error("Error deleting task:", error);
-    }
-  }
 
   const filteredTasks = tasks?.filter((task) => {
     if (selectedCategory === 4) {
@@ -188,7 +173,7 @@ const App = () => {
               borderRadius: "8px",
             }}
             className="add-task-button"
-            onClick={handleEditFullTask}
+            onClick={handleEditTask}
           >
             Edit Task
           </button>
@@ -267,7 +252,7 @@ const App = () => {
                   <td className="table-cell">
                     <select
                       value={task.category}
-                      onChange={(e) => handleEditTask(e, task)}
+                      onChange={(e) => handleChangeCategory(e, task)}
                     >
                       <option value="0">None</option>
                       <option value="1">Work</option>
@@ -283,7 +268,7 @@ const App = () => {
     fontSize: "30px",
     cursor: "pointer",
   }}
-  onClick={() => handleImageClick(task.id, !task.isCompleted)}
+  onClick={() => handleCompleteTask(task.id, !task.isCompleted)}
 >
   {task.isCompleted ? "✅" : "❌"}
 </span>
