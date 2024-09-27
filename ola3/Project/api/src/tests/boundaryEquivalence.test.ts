@@ -5,7 +5,7 @@ describe("title size equivalence", () => {
 
     test("Partition 1 Invalid", () => {
         for (let i = 0; i < 3; i++) {
-            let l = getRandomInt(partition1[0], partition1[1]);
+            const l = getRandomInt(partition1[0], partition1[1]);
 
             let testTitle: string = "";
             for (let j = 0; j < l; j++) {
@@ -13,28 +13,28 @@ describe("title size equivalence", () => {
             }
 
             expect(() => {
-                checkAddTaskBoundary(testTitle, 'description', "undefined", false)
-            }).toThrow(Error)
+                checkAddTaskBoundary(testTitle, 'description', "undefined", false);
+            }).toThrow(Error);
         }
     });
 
     test("Partition 2 Valid", () => {
         for (let i = 0; i < 3; i++) {
-            let l = getRandomInt(partition2[0], partition2[1]);
+            const l = getRandomInt(partition2[0], partition2[1]);
 
             let testTitle: string = "";
             for (let j = 0; j < l; j++) {
                 testTitle += "x";
             }
             expect(() => {
-                checkAddTaskBoundary(testTitle, 'description', "undefined", false)
-            }).not.toThrow(Error)
+                checkAddTaskBoundary(testTitle, 'description', "undefined", false);
+            }).not.toThrow(Error);
         }
     });
 
     test("Partition 3 Invalid", () => {
         for (let i = 0; i < 3; i++) {
-            let l = getRandomInt(partition3[0], partition3[1]);
+            const l = getRandomInt(partition3[0], partition3[1]);
 
             let testTitle: string = "";
             for (let j = 0; j < l; j++) {
@@ -42,11 +42,11 @@ describe("title size equivalence", () => {
             }
 
             expect(() => {
-                checkAddTaskBoundary(testTitle, 'description', "undefined", false)
-            }).toThrow(Error)
+                checkAddTaskBoundary(testTitle, 'description', "undefined", false);
+            }).toThrow(Error);
         }
     });
-})
+});
 
 describe("title size boundary", () => {
     const partition1 = [0, 2], partition2 = [3, 100], partition3 = [101, 1000];
@@ -59,8 +59,8 @@ describe("title size boundary", () => {
             }
 
             expect(() => {
-                checkAddTaskBoundary(testTitle, 'description', "undefined", false)
-            }).toThrow(Error)
+                checkAddTaskBoundary(testTitle, 'description', "undefined", false);
+            }).toThrow(Error);
         }
     });
 
@@ -72,8 +72,8 @@ describe("title size boundary", () => {
             }
 
             expect(() => {
-                checkAddTaskBoundary(testTitle, 'description', "undefined", false)
-            }).not.toThrow(Error)
+                checkAddTaskBoundary(testTitle, 'description', "undefined", false);
+            }).not.toThrow(Error);
         }
     });
 
@@ -85,8 +85,8 @@ describe("title size boundary", () => {
             }
 
             expect(() => {
-                checkAddTaskBoundary(testTitle, 'description', "undefined", false)
-            }).toThrow(Error)
+                checkAddTaskBoundary(testTitle, 'description', "undefined", false);
+            }).toThrow(Error);
         }
     });
 });

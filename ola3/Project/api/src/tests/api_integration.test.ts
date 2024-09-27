@@ -22,7 +22,7 @@ describe('API Integration Tests', () => {
     });
 
     beforeEach(async () => {
-        await taskRepository.taskRepository.clear()
+        await taskRepository.taskRepository.clear();
         dummyTask = await taskRepository.createTask('Another dummy task', 'description', null, false);
     });
     afterEach(async () => {
