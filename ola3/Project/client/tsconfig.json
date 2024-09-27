@@ -18,12 +18,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "types": ["jest", "node"]
+    "jsx": "react-jsx"
   },
   "include": [
-    "src/**/*",
-    "cypress.config.ts",
-    "cypress/**/*.ts"
+    "src/**/*"
   ]
 }
