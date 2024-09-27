@@ -8,6 +8,7 @@ export type Task = {
   category?: TASK_CATEGORIES;
 };
 
+/* eslint-disable no-unused-vars */
 export enum TASK_CATEGORIES {
   NONE = 0,
   WORK = 1,

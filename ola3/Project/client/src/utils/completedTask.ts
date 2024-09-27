@@ -8,7 +8,7 @@ export const completedTask = async (
   try {
     return await completedTaskAPI(completedTaskId, isCompleted);
   } catch (error) {
-    console.error("Error changing completion state of task:", error);
-    throw error;
+    console.error("Error changing completion state of task:", error); // eslint-disable-line no-console
+    throw error; 
   }
 };

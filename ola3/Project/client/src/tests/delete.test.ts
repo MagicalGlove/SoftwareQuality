@@ -1,6 +1,5 @@
 import { deleteTask } from "../utils/deleteTask";
 import * as api from "../api/tasks";
-import { Task } from "../types/tasks";
 
 jest.mock("../api/tasks", () => ({
   deleteTaskAPI: jest.fn(),

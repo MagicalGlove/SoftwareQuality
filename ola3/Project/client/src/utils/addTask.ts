@@ -5,7 +5,7 @@ export const addTask = async (newTask: Task): Promise<Task> => {
     try {
       return await addTaskAPI(newTask);
     } catch (error) {
-      console.error('Error adding task:', error);
+      console.error('Error adding task:', error); // eslint-disable-line no-console
       throw error;
     }
   };

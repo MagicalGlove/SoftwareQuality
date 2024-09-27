@@ -22,5 +22,6 @@
   },
   "include": [
     "src/**/*"
-  ]
+, "eslint.config.mjs",
+"cypress/**/*"  ]
 }
