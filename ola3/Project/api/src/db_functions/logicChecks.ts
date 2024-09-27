@@ -9,16 +9,17 @@ function checkAddTaskBoundary(text: string, description: string, deadline: strin
         throw new Error("Deadline is required");
     }
 
-    let deadlineTime = new Date(deadline);
-    let currentTime = new Date();
+    const deadlineTime = new Date(deadline);
+    const currentTime = new Date();
+    const millisecondsInADay = 86400000;
     let diff = deadlineTime.valueOf() - currentTime.valueOf();
-    diff /= 86400000 ;
+    diff /= millisecondsInADay ;
     diff = Math.round(diff)
     if (diff < 0) {
-        throw new Error("Deadline must be greater than or equal to current date | " + diff)
+        throw new Error("Deadline must be greater than or equal to current date | ")
     }
     if (diff > 100) {
-        throw new Error("Deadline must be within a realistic time limit | " + diff)
+        throw new Error("Deadline must be within a realistic time limit | ")
     }
 
     if (isCompleted === undefined) {
